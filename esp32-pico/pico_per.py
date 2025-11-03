@@ -14,6 +14,7 @@ with open("uuids.json", mode="r", encoding="utf-8") as read_file:
 
 IAM = "Peripheral"
 BLE_NAME = f"{IAM}"
+MESSAGE = f"Hello from {IAM}"
 BLE_SVC_UUID = bluetooth.UUID(uuids_data["service"])
 BLE_CHARACTERISTIC_UUID = bluetooth.UUID(uuids_data["characteristic"])
 BLE_APPEARANCE = 0x0300
