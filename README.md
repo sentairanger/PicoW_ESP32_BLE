@@ -13,6 +13,11 @@ Inside the `esp32_pico_pot` directory are these files:
 * `esp32_central_pwm.py`: This adjusts the brightness of the LED based on the values it gets from the Pico.
 * `uuids.json`
 
+Inside the `esp32_pico_dual` directory are these files:
+* `esp32_central.py`: Same code as before
+* `pico_per.py`: Also same code as before
+* `uuids.json`
+
 
 ![image](https://github.com/sentairanger/PicoW_ESP32_BLE/blob/main/esp32-pico_bb.jpg)
 ![picture](https://github.com/sentairanger/PicoW_ESP32_BLE/blob/main/esp32-pico-pot_bb.jpg)
