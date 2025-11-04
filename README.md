@@ -7,4 +7,12 @@ Inside the `esp32-pico` directory are these files:
 * `pico_per.py`: This is for the Pico to act as a peripheral.
 * `uuids.json`: This is the JSON file for the UUIDs
 
+Inside the `esp32_pico_pot` directory are these files:
+* `esp32_central.py`: Same file as before in the `esp32-pico` folder
+* `pico_per_pot.py`: This is for the Pico to send the values of the potentiometer to the ESP32.
+* `esp32_central_pwm.py`: This adjusts the brightness of the LED based on the values it gets from the Pico.
+* `uuids.json`
+
+
 ![image](https://github.com/sentairanger/PicoW_ESP32_BLE/blob/main/esp32-pico_bb.jpg)
+![picture](https://github.com/sentairanger/PicoW_ESP32_BLE/blob/main/esp32-pico-pot_bb.jpg)
