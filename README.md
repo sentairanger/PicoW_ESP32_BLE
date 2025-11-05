@@ -18,6 +18,12 @@ Inside the `esp32_pico_dual` directory are these files:
 * `pico_per.py`: Also same code as before
 * `uuids.json`
 
+Inside the `esp32_pico_button` directory are these files:
+* `esp32_central.py`: Same code as before
+* `pico_per_button.py`: This code enables button control and sends messages to the ESP32
+* `esp32_central_led.py`: Same code as before but turns the LED on and off based on messages from the Pico.
+* `uuids.json`
 
 ![image](https://github.com/sentairanger/PicoW_ESP32_BLE/blob/main/esp32-pico_bb.jpg)
 ![picture](https://github.com/sentairanger/PicoW_ESP32_BLE/blob/main/esp32-pico-pot_bb.jpg)
+![image](https://github.com/sentairanger/PicoW_ESP32_BLE/blob/main/esp32_pico_button_bb.jpg)
