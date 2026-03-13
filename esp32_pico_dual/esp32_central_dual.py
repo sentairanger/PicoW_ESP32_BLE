@@ -26,6 +26,11 @@ MESSAGE = f"Hello from {IAM}!"
 BLE_NAME = f"{IAM}"
 BLE_SVC_UUID = bluetooth.UUID(uuids_data["service"])
 BLE_CHARACTERISTIC_UUID = bluetooth.UUID(uuids_data["characteristic"])
+BLE_APPEARANCE = 0x0300
+BLE_ADVERTISING_INTERVAL = 2000
+BLE_SCAN_LENGTH = 5000
+BLE_INTERVAL = 30000
+BLE_WINDOW = 30000
 
 # state variables
 message_count = 0
@@ -40,7 +45,7 @@ def decode_message(message):
     """Decode a message from bytes."""
     return message.decode('utf-8')
 
-# Blink LED when connected to Pico
+# Blink LED when connected to Pi
 async def blink_led_task():
     global connected
     toggle = True
@@ -71,6 +76,19 @@ async def receive_data_task(characteristic):
             print(f"Error receiving data: {e}")
             break
 
+
+# Send data to Pico
+async def send_data_task(connection, characteristic):
+    while True:
+        message = f"{MESSAGE}"
+        #print(message)
+        try:
+            msg = encode_message(message)
+            characteristic.write(msg)
+            await asyncio.sleep(1)
+        except Exception as ex:
+            print(f"Error: {ex}")
+            continue
 
 async def ble_scan():
     """ Scan for a BLE device with the matching service UUID """
@@ -123,7 +141,8 @@ async def run_central_mode():
 
             tasks = [
                 asyncio.create_task(receive_data_task(characteristic)),
-                asyncio.create_task(blink_led_task())
+                asyncio.create_task(send_data_task(connection, characteristic)),
+                asyncio.create_task(blink_led_task()),
             ]
             await asyncio.gather(*tasks)
             connected = False
@@ -134,3 +153,4 @@ async def run_central_mode():
 
 
 asyncio.run(run_central_mode())
+
