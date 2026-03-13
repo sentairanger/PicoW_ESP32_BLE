@@ -14,8 +14,8 @@ Inside the `esp32_pico_pot` directory are these files:
 * `uuids.json`
 
 Inside the `esp32_pico_dual` directory are these files:
-* `esp32_central.py`: Same code as before
-* `pico_per.py`: Also same code as before
+* `esp32_central_dual.py`: This code is used to send and receive data to and from the Pico
+* `pico_per_dual.py`: This is used to send and receive data to and from the ESP32
 * `uuids.json`
 
 Inside the `esp32_pico_button` directory are these files:
