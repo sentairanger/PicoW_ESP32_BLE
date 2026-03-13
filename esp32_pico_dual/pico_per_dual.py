@@ -13,8 +13,8 @@ with open("uuids.json", mode="r", encoding="utf-8") as read_file:
     uuids_data = json.load(read_file) 
 
 IAM = "Peripheral"
-MESSAGE = f"Hello from {IAM}"
 BLE_NAME = f"{IAM}"
+MESSAGE = f"Hello from {IAM}!"
 BLE_SVC_UUID = bluetooth.UUID(uuids_data["service"])
 BLE_CHARACTERISTIC_UUID = bluetooth.UUID(uuids_data["characteristic"])
 BLE_APPEARANCE = 0x0300
@@ -42,6 +42,20 @@ async def blink_led_task():
         toggle = not toggle
         blink = 1000 if connected else 250
         await asyncio.sleep_ms(blink)
+
+async def receive_data_task(characteristic):
+    """Receive data from the central device."""
+    while True:
+        try:
+            # This blocks until new data is available
+            data = characteristic.read()
+
+            if data:
+                print(f"ESP32 Received: {decode_message(data)}")
+                await asyncio.sleep(1)
+        except Exception as e:
+            print(f"Error receiving data: {e}")
+            break
 
 async def send_data_task(connection, characteristic):
     """Send data to the central device."""
@@ -88,6 +102,7 @@ async def run_peripheral_mode():
 
             tasks = [
                 asyncio.create_task(send_data_task(connection, characteristic)),
+                asyncio.create_task(receive_data_task(characteristic)),
                 asyncio.create_task(blink_led_task())
             ]
             await asyncio.gather(*tasks)
@@ -95,4 +110,5 @@ async def run_peripheral_mode():
             connected = False 
             break
 
-asyncio.run(run_peripheral_mode)
+asyncio.run(run_peripheral_mode())
+
